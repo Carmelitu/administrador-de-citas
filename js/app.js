@@ -10,6 +10,43 @@ const sintomasInput = document.querySelector('#sintomas');
 const formulario = document.querySelector('#nueva-cita');
 const contenedorCitas = document.querySelector('#citas');
 
+// Clases
+class Citas {
+    constructor() {
+        this.citas = [];
+    }
+}
+
+class UI {
+    mostrarAlerta(mensaje, tipo){
+        // Creacion div
+        const divMensaje = document.createElement('div');
+        divMensaje.classList.add('alert', 'text-center', 'd-block', 'col-12');
+
+        // Validacion tipo de mensaje
+        if (tipo === 'error'){
+            divMensaje.classList.add('alert-danger');
+        } else {
+            divMensaje.classList.add('alert-success');
+        }
+
+        // Se agrega texto
+        divMensaje.textContent = mensaje;
+
+        // Agregar al DOM
+        document.querySelector('#contenido').insertBefore(divMensaje, document.querySelector('.agregar-cita'));
+
+        // Quitar alerta despues de 5 segundos
+        setTimeout(() => {
+            divMensaje.remove();
+        }, 5000);
+    }
+}
+
+const administrarCitas = new Citas();
+const ui = new UI();
+
+
 // Eventos
 eventListeners();
 
@@ -25,6 +62,8 @@ function eventListeners(){
     horaInput.addEventListener('change', datosCita);
 
     sintomasInput.addEventListener('change', datosCita);
+
+    formulario.addEventListener('submit', nuevaCita);
 }
 
 // Objeto principal
@@ -44,12 +83,23 @@ const citaObj = {
 function datosCita(e){
     // Escribe sobre el objeto
     citaObj[e.target.name] = e.target.value;
-
-    console.log(citaObj);
 }
 
+// Valida y agrega una nueva Cita
+function nuevaCita(e){
+    e.preventDefault();
 
+    // Extraer info del objeto
+    const {mascota, propietario, telefono, fecha, hora, sintomas} = citaObj;
 
+    // Validacion
+
+    if (mascota == '' || propietario == '' || telefono == '' || fecha == '' || hora == '' || sintomas == ''){
+        ui.mostrarAlerta('Todos los campos son obligatorios', 'error');
+
+        return;
+    }
+}
 
 
 
