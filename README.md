@@ -7,7 +7,7 @@ Check it out here: https://administrador-citas-carmelitu.netlify.app/
 This page is in charge of keeping track of the appointments of a veterinary clinic. You can add, modify and remove as you wish.
 
 - In progress...
-- 
+
 ## Builded with 🛠️
 
 * JavaScript
