@@ -8,7 +8,37 @@ const sintomasInput = document.querySelector('#sintomas');
 
 // UI
 const formulario = document.querySelector('#nueva-cita');
+formulario.addEventListener('submit', nuevaCita);
+
 const contenedorCitas = document.querySelector('#citas');
+
+// Eventos
+eventListeners();
+
+function eventListeners(){
+    mascotaInput.addEventListener('change', datosCita);
+
+    propietarioInput.addEventListener('change', datosCita);
+
+    telefonoInput.addEventListener('change', datosCita);
+
+    fechaInput.addEventListener('change', datosCita);
+
+    horaInput.addEventListener('change', datosCita);
+
+    sintomasInput.addEventListener('change', datosCita);
+}
+
+// Objeto principal
+const citaObj = {
+    mascota: '',
+    propietario: '',
+    telefono: '',
+    fecha: '',
+    hora: '',
+    sintomas: ''
+}
+
 
 // Clases
 class Citas {
@@ -45,48 +75,79 @@ class UI {
             divMensaje.remove();
         }, 5000);
     }
+
+    mostrarCitas({citas}){
+        console.log(citas);
+
+        this.limpiarHTML();
+
+        citas.forEach( cita => {
+            const {mascota, propietario, telefono, fecha, hora, sintomas, id} = cita;
+
+            const divCita = document.createElement('div');
+            divCita.classList.add('cita', 'p-3');
+            divCita.dataset.id = id;
+
+            // Scripting elementos de la cita
+            const mascotaParrafo = document.createElement('h2');
+            mascotaParrafo.classList.add('card-title', 'font-weight-bolder');
+            mascotaParrafo.textContent = mascota;
+
+            const propParrafo = document.createElement('p');
+            propParrafo.innerHTML = `
+                <span class="font-weight-bolder">Propietario: </span>${propietario}
+            `;
+
+            const telParrafo = document.createElement('p');
+            telParrafo.innerHTML = `
+                <span class="font-weight-bolder">Teléfono: </span>${telefono}
+            `;
+
+            const fechaParrafo = document.createElement('p');
+            fechaParrafo.innerHTML = `
+                <span class="font-weight-bolder">Fecha: </span>${fecha}
+            `;
+
+            const horaParrafo = document.createElement('p');
+            horaParrafo.innerHTML = `
+                <span class="font-weight-bolder">Hora: </span>${hora}
+            `;
+
+            const sintomasParrafo = document.createElement('p');
+            sintomasParrafo.innerHTML = `
+                <span class="font-weight-bolder">Síntomas: </span>${sintomas}
+            `;
+
+            // Agrega los parrafos al divCita
+            divCita.appendChild(mascotaParrafo);
+            divCita.appendChild(propParrafo);
+            divCita.appendChild(telParrafo);
+            divCita.appendChild(fechaParrafo);
+            divCita.appendChild(horaParrafo);
+            divCita.appendChild(sintomasParrafo);
+
+            // Agregar citas al HTML
+            contenedorCitas.appendChild(divCita);
+            
+        });
+    }
+
+    limpiarHTML(){
+        while(contenedorCitas.firstChild){
+            contenedorCitas.removeChild(contenedorCitas.firstChild);
+        }
+    }
 }
 
 const administrarCitas = new Citas();
 const ui = new UI();
-
-
-// Eventos
-eventListeners();
-
-function eventListeners(){
-    mascotaInput.addEventListener('change', datosCita);
-
-    propietarioInput.addEventListener('change', datosCita);
-
-    telefonoInput.addEventListener('change', datosCita);
-
-    fechaInput.addEventListener('change', datosCita);
-
-    horaInput.addEventListener('change', datosCita);
-
-    sintomasInput.addEventListener('change', datosCita);
-
-    formulario.addEventListener('submit', nuevaCita);
-}
-
-// Objeto principal
-const citaObj = {
-    mascota: '',
-    propietario: '',
-    telefono: '',
-    fecha: '',
-    hora: '',
-    sintomas: ''
-}
-
-
 
 // Funciones
 // Agrega datos al objeto de cita
 function datosCita(e){
     // Escribe sobre el objeto
     citaObj[e.target.name] = e.target.value;
+    console.log(citaObj);
 }
 
 // Valida y agrega una nueva Cita
@@ -98,27 +159,31 @@ function nuevaCita(e){
 
     // Validacion
 
-    if (mascota == '' || propietario == '' || telefono == '' || fecha == '' || hora == '' || sintomas == ''){
+    if (mascota === '' || propietario === '' || telefono === '' || fecha === '' || hora === '' || sintomas === ''){
         ui.mostrarAlerta('Todos los campos son obligatorios', 'error');
-
         return;
     }
 
     // Generar ID de cita
     citaObj.id = Date.now();
-
-
+    console.log(citaObj);
 
     // Creacion de nueva cita
     administrarCitas.agregarCita({...citaObj});
+
+    // Se agregó ok
+    ui.mostrarAlerta('Cita agregada correctamente');
+
+    // Mostrar HTML Citas
+    ui.mostrarCitas(administrarCitas);
 
     // Reiniciar formulario y objeto
     reiniciarObjeto();
     formulario.reset();
     
-    // Mostrar HTML Citas
 }
 
+// Vacía el objeto para que se cargue correctamente en el arreglo
 function reiniciarObjeto() {
     citaObj.mascota = '';
     citaObj.propietario = '';
