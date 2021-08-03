@@ -26,7 +26,7 @@ When you click to modify an appointment
 
 <img src="https://github.com/Carmelitu/administrador-de-citas/blob/master/edicion.JPG" style="margin: 0 auto"/>
 
-Result
+Final result
 
 <img src="https://github.com/Carmelitu/administrador-de-citas/blob/master/citas-cargadas.JPG" style="margin: 0 auto"/>
 
