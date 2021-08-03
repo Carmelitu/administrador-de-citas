@@ -6,7 +6,7 @@ Check it out here: https://administrador-citas-carmelitu.netlify.app/
 
 Project made for a JavaScript course on Udemy. HTML and CSS are delivered already finalized by the teacher.
 
-This page is in charge of keeping track of appointments for a veterinary clinic. You can add, modify and delete appointments as you wish. The form also has validations to correctly load all the fields.
+This page is in charge of keeping track of appointments for a veterinary clinic. You can add, modify and delete appointments as you wish. The form also has validations to correctly load all the fields. It uses classes and modules.
 
 ## Home Screen
 
