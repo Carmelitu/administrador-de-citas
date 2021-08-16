@@ -1,12 +1,12 @@
 # Administrador de citas / Veterinary appointments
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/245add80-5871-4fff-8c4c-ca3da43df43a/deploy-status)](https://app.netlify.com/sites/administrador-citas-carmelitu/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/40dfe735-627a-4a1f-892f-3bdbf5028fd0/deploy-status)](https://app.netlify.com/sites/administrador-citas-pwa-carmelitu/deploys)
 
-Check it out here: https://administrador-citas-carmelitu.netlify.app/
+Check it out here: https://administrador-citas-pwa-carmelitu.netlify.app/
 
 Project made for a JavaScript course on Udemy. HTML and CSS are delivered already finalized by the teacher.
 
-This page is in charge of keeping track of appointments for a veterinary clinic. You can add, modify and delete appointments as you wish. The form also has validations to correctly load all the fields. It uses classes and modules.
+This page is in charge of keeping track of appointments for a veterinary clinic. You can add, modify and delete appointments as you wish. The form also has validations to correctly load all the fields. It is a Progressive Web App. You can download it and use it offline.
 
 ## Home Screen
 
